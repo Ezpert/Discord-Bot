@@ -9,6 +9,9 @@ def handle_response(message) -> str:
     if p_message.lower() == "cat":
         return 'cat.jpg'
 
+    if p_message.lower() == 'never back down never what?':
+        return 'NEVER GIVE UP!'
+
     if p_message.lower() == 'hello':
         return 'Hey There!'
 
