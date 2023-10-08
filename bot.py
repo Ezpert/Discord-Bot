@@ -13,7 +13,7 @@ intents = Intents.default()
 intents.message_content = True
 
 bot = commands.Bot(command_prefix="!", intents=intents)
-TOKEN = ''
+TOKEN = 'MTE2MDMxMjQ1MTM2ODIzOTE4NQ.GnI-pX.kP5ByMrewXksdR0PpjcJ9SjgL69uTghCDMGewk'
 
 
 async def send_message(message, user_message, is_private):
@@ -42,9 +42,6 @@ def run_discord_bot():
         print(f"user_message: {user_message}")
 
         print(f"{username} said: '{user_message}' ({channel})")
-
-        if user_message.lower() == 'never back down never what?':
-            return 'NEVER GIVE UP!'
 
         if user_message.lower() == "!cat":
             response = requests.get('https://cataas.com/cat')
