@@ -1,0 +1,57 @@
+Index: bot.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import discord\r\nimport responses\r\nfrom discord import Intents\r\nfrom discord.ext import commands\r\n\r\n# Enable all standard intents and message content\r\n# (prefix commands generally require message content)\r\nintents = Intents.default()\r\nintents.message_content = True\r\n\r\nbot = commands.Bot(command_prefix=\"!\", intents=intents)\r\n\r\n\r\nasync def send_message(message, user_message, is_private):\r\n    try:\r\n        response = responses.handle_response(user_message)\r\n        await message.author.send(response) if is_private else await message.channel.send(response)\r\n    except Exception as e:\r\n        print(e)\r\n\r\n\r\ndef run_discord_bot():\r\n    TOKEN = 'MTE2MDMxNzY2NjgyNTg4MzY4OA.Gh7efN.rOGwqGHJk10sCYPcAbi0jr_z2drfqjimv4AecI'\r\n    client = discord.Client(intents=intents)\r\n\r\n    @client.event\r\n    async def on_ready():\r\n        print(f'{client.user} is now running!')\r\n\r\n    @client.event\r\n    async def on_message(message):\r\n        if message.author == client.user:\r\n            return\r\n\r\n        username = str(message.author)\r\n        user_message = str(message.content)\r\n        channel = str(message.channel)\r\n        print(f\"user_message: {user_message}\")\r\n\r\n        print(f\"{username} said: '{user_message}' ({channel})\")\r\n\r\n        if user_message[0] == '?':\r\n            user_message = user_message[1:]\r\n            await send_message(message, user_message, is_private=True)\r\n\r\n        elif user_message[0] == '!':\r\n            user_message = user_message[1:]\r\n            await send_message(message, user_message, is_private=False)\r\n\r\n    client.run(TOKEN)\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/bot.py b/bot.py
+--- a/bot.py	(revision 07aec48064314a90701e89c737de8e35aad7b309)
++++ b/bot.py	(date 1696785973514)
+@@ -20,7 +20,7 @@
+ 
+ 
+ def run_discord_bot():
+-    TOKEN = 'MTE2MDMxNzY2NjgyNTg4MzY4OA.Gh7efN.rOGwqGHJk10sCYPcAbi0jr_z2drfqjimv4AecI'
++    TOKEN = 'MTE2MDYxOTAzNjY3NDEwMTMxOQ.GSrilm.65cBQX5tFb518eEXGzXC6vQmtPWEf9a7gF0QEk'
+     client = discord.Client(intents=intents)
+ 
+     @client.event
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"Black\">\r\n    <option name=\"sdkName\" value=\"Python 3.10 (pythonProject) (2)\" />\r\n  </component>\r\n  <component name=\"ProjectRootManager\" version=\"2\" project-jdk-name=\"Python 3.10 (pythonProject) (2)\" project-jdk-type=\"Python SDK\" />\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+--- a/.idea/misc.xml	(revision 07aec48064314a90701e89c737de8e35aad7b309)
++++ b/.idea/misc.xml	(date 1696786010053)
+@@ -3,5 +3,5 @@
+   <component name="Black">
+     <option name="sdkName" value="Python 3.10 (pythonProject) (2)" />
+   </component>
+-  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.10 (pythonProject) (2)" project-jdk-type="Python SDK" />
++  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.10 (Discord-Bot)" project-jdk-type="Python SDK" />
+ </project>
+\ No newline at end of file
+Index: .idea/pythonProject.iml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<module type=\"PYTHON_MODULE\" version=\"4\">\r\n  <component name=\"NewModuleRootManager\">\r\n    <content url=\"file://$MODULE_DIR$\">\r\n      <excludeFolder url=\"file://$MODULE_DIR$/venv\" />\r\n    </content>\r\n    <orderEntry type=\"inheritedJdk\" />\r\n    <orderEntry type=\"sourceFolder\" forTests=\"false\" />\r\n  </component>\r\n</module>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/pythonProject.iml b/.idea/pythonProject.iml
+--- a/.idea/pythonProject.iml	(revision 07aec48064314a90701e89c737de8e35aad7b309)
++++ b/.idea/pythonProject.iml	(date 1696786010043)
+@@ -4,7 +4,7 @@
+     <content url="file://$MODULE_DIR$">
+       <excludeFolder url="file://$MODULE_DIR$/venv" />
+     </content>
+-    <orderEntry type="inheritedJdk" />
++    <orderEntry type="jdk" jdkName="Python 3.10 (Discord-Bot)" jdkType="Python SDK" />
+     <orderEntry type="sourceFolder" forTests="false" />
+   </component>
+ </module>
+\ No newline at end of file

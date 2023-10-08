@@ -6,6 +6,7 @@ def handle_response(message) -> str:
 
     if p_message.lower() == 'roll':
         return str(random.randint(1, 6))
+
     if p_message.lower() == "cat":
         return 'cat.jpg'
 
