@@ -25,6 +25,22 @@ async def send_message(message, user_message, is_private):
         print(e)
 
 
+@bot.command()
+async def join(ctx):
+    channel = ctx.author.voice.channel
+    await channel.connect()
+
+
+@bot.command()
+async def disconnect(ctx):
+    voice_state = ctx.author.voice
+    if voice_state and voice_state.channel:
+        voice_channel = voice_state.channel
+        voice_client = discord.utils.get(bot.voice_clients, guild=ctx.guild)
+        if voice_client and voice_client.channel == voice_channel:
+            await voice_client.disconnect(force=True)
+
+
 def run_discord_bot():
     client = discord.Client(intents=intents)
 
