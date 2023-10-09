@@ -13,7 +13,8 @@ intents = Intents.default()
 intents.message_content = True
 
 bot = commands.Bot(command_prefix="!", intents=intents)
-TOKEN = ''
+
+TOKEN = 'MTE2MDMxMjQ1MTM2ODIzOTE4NQ.GqglEN.En-k66fHwR6MCfiZfkGpMEuQo_G356j4nQshW0'
 
 
 async def send_message(message, user_message, is_private):
@@ -43,24 +44,34 @@ def run_discord_bot():
 
         print(f"{username} said: '{user_message}' ({channel})")
 
-        if user_message.lower() == "!cat":
-            response = requests.get('https://cataas.com/cat')
-            if response.status_code == 200:
-                with open('cats.png', 'wb') as f:
-                    f.write(response.content)
-                await message.channel.send(file=discord.File('cats.png'))
-                os.remove('cats.png')
-            else:
-                print("Failed to save the image")
-        elif user_message == "!cat-hello":
-            response = requests.get('https://cataas.com/cat/says/hello')
-            if response.status_code == 200:
-                with open('cats.png', 'wb') as f:
-                    f.write(response.content)
-                await message.channel.send(file=discord.File('cats.png'))
-                os.remove('cats.png')
-            else:
-                print("Failed to save the image")
+        if user_message.lower() == '!join':
+            await join(message)
+        elif user_message.lower() == '!disconnect':
+            await disconnect(message)
+        elif user_message.lower().startswith('!cat'):
+            pic_times = 1
+            try:
+                command, pic_times, pic_text = user_message.split(' ', 2)
+            except ValueError:
+                print("Split unsuccessful. Unable to split the string.")
+                try:
+                    command, pic_text = user_message.split(' ', 1)
+                except ValueError:
+                    pic_text = ' '
+                    print("Split unsuccessful. Unable to split the string.")
+
+            for x in range(int(pic_times)):
+                if not pic_text:
+                    image = requests.get('https://cataas.com/cat')
+                else:
+                    image = requests.get('https://cataas.com/cat/says/' + pic_text)
+                if image.status_code == 200:
+                    with open('cats.png', 'wb') as f:
+                        f.write(image.content)
+                        await message.channel.send(file=discord.File('cats.png'))
+                    os.remove('cats.png')
+                else:
+                    print("Failed to save the image")
         elif user_message[0] == '?':
             user_message = user_message[1:]
             await send_message(message, user_message, is_private=True)
