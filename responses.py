@@ -16,7 +16,15 @@ def handle_response(message) -> str:
         return 'NEVER GIVE UP!'
 
     if p_message.lower() == 'hello':
-        return 'Hey There!'
+        hey = random.randint(1, 4)
+        if hey == 1:
+            return 'Hey Beautiful!'
+        elif hey == 2:
+            return 'Hey sexy ;)'
+        elif hey == 3:
+            return 'Yo'
+        else:
+            return 'Hey cutie'
 
     if p_message.lower() == 'help':
         return 'This is help message that you can modify.'
