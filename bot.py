@@ -13,7 +13,7 @@ intents = Intents.default()
 intents.message_content = True
 
 bot = commands.Bot(command_prefix="!", intents=intents)
-TOKEN = ''
+TOKEN = 'MTE2MDMxNzY2NjgyNTg4MzY4OA.GWdHLP.H_kNvnVYwNrvO4PgduasrltxPqw9mrw2TdKN6E'
 
 
 async def send_message(message, user_message, is_private):
